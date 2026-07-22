@@ -1,0 +1,40 @@
+name: Selenium POM CI
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "testing16-seleniun-pom/**"
+      - ".github/workflows/selenium-pom-ci.yml"
+  pull-request:
+    branchs:
+      - main
+    paths:
+      - "testing16-seleniun-pom/**"
+      - ".github/workflows/selenium-pom-ci.yml"
+  #sẽ tự động cd vào folder cần chạy
+defaults:
+  run:
+    working-directory: testing16-selenium-pom
+
+jobs:
+  selenium-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: action/checkout@v4
+
+      - name: set up JDK 21
+        uses: action/setup-java@v4
+        with:
+          distribution: "temurin"
+          java-version: '21'
+          cache: 'maven'
+
+      - name: Install Chrome
+        uses: browser-action/setup-chrome@v1
+
+      - name: run selenium test
+        run: mvn -B test -Dheadless=true -Djava.awt.headless=true
+
