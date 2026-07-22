@@ -5,15 +5,16 @@ on:
     branches:
       - main
     paths:
-      - "testing16-seleniun-pom/**"
+      - "testing16-selenium-pom/**"
       - ".github/workflows/selenium-pom-ci.yml"
-  pull-request:
-    branchs:
+  pull_request:
+    branches:
       - main
     paths:
-      - "testing16-seleniun-pom/**"
+      - "testing16-selenium-pom/**"
       - ".github/workflows/selenium-pom-ci.yml"
-  #sẽ tự động cd vào folder cần chạy
+
+# Sẽ tự động cd vào folder cần chạy (ĐỌC LƯU Ý BÊN DƯỚI)
 defaults:
   run:
     working-directory: testing16-selenium-pom
@@ -23,18 +24,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
-        uses: action/checkout@v4
+        uses: actions/checkout@v4
 
-      - name: set up JDK 21
-        uses: action/setup-java@v4
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
         with:
           distribution: "temurin"
           java-version: '21'
           cache: 'maven'
 
       - name: Install Chrome
-        uses: browser-action/setup-chrome@v1
+        uses: browser-actions/setup-chrome@v1
 
-      - name: run selenium test
+      - name: Run Selenium test
         run: mvn -B test -Dheadless=true -Djava.awt.headless=true
-
