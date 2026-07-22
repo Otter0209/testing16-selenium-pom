@@ -4,20 +4,9 @@ on:
   push:
     branches:
       - main
-    paths:
-      - "testing16-selenium-pom/**"
-      - ".github/workflows/selenium-pom-ci.yml"
   pull_request:
     branches:
       - main
-    paths:
-      - "testing16-selenium-pom/**"
-      - ".github/workflows/selenium-pom-ci.yml"
-
-# Sẽ tự động cd vào folder cần chạy (ĐỌC LƯU Ý BÊN DƯỚI)
-defaults:
-  run:
-    working-directory: testing16-selenium-pom
 
 jobs:
   selenium-tests:
